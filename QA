@@ -1,0 +1,147 @@
+Test Plan Outline for Testing the Registration Form
+1. Introduction
+This document outlines the testing strategy and approach for verifying the functionality of the online registration form on the website. The goal is to ensure the form works correctly and efficiently.
+
+2. Objectives
+Ensure the registration form collects and validates user information correctly.
+Verify that error messages are displayed appropriately for invalid inputs.
+Confirm successful data submission to the server upon correct completion of the form.
+
+3. Scope
+Functional testing of the registration form fields and validation rules.
+Usability testing to ensure the form is user-friendly.
+Performance testing to check the form's responsiveness.
+Security testing to ensure data integrity and protection.
+
+4. Test Environment
+Web browsers: Chrome, Firefox, Safari, Edge
+Operating systems: Windows, macOS, Linux
+Devices: Desktop, tablet, and mobile
+
+5. Test Data
+Valid and invalid user details for all input fields.
+Various combinations of inputs to test edge cases.
+
+6. Test Scenarios
+Positive Scenarios:
+Successful registration with valid data.
+Successful registration with and without newsletter subscription.
+
+Negative Scenarios:
+Registration with an invalid email format.
+Registration with mismatched passwords.
+Registration with a password less than 8 characters.
+Registration without filling mandatory fields.
+
+7. Test Execution Schedule
+Week 1: Test planning and preparation.
+Week 2: Test case development.
+Week 3: Test execution.
+Week 4: Bug fixing and retesting.
+
+8. Risks and Assumptions
+Risk: Unexpected changes in requirements may affect the test plan.
+Assumption: The application code is stable and no major changes will occur during the testing period.
+
+Test Cases
+Test Case 1: Successful Registration with Valid Data
+Test Case ID: TC01
+Test Case Description: Verify that the user can successfully register with valid data.
+Preconditions: The registration form page is accessible.
+Test Steps:
+Enter a valid full name.
+Enter a valid email address.
+Enter a password of at least 8 characters.
+Confirm the password.
+Select a date of birth.
+Select a gender.
+Choose to subscribe or not to the newsletter.
+Click the Submit button.
+Expected Results: The user is successfully registered, and a success message is displayed.
+Post-conditions: User data is stored in the database.
+
+Test Case 2: Registration with Mismatched Passwords
+Test Case ID: TC02
+Test Case Description: Verify that an error message is displayed when passwords do not match.
+Preconditions: The registration form page is accessible.
+Test Steps:
+Enter a valid full name.
+Enter a valid email address.
+Enter a password of at least 8 characters.
+Enter a different password in the Confirm Password field.
+Click the Submit button.
+Expected Results: An error message "Passwords do not match" is displayed.
+Post-conditions: No user data is stored.
+
+Test Case 3: Registration with Invalid Email Format
+Test Case ID: TC03
+Test Case Description: Verify that an error message is displayed when an invalid email format is entered.
+Preconditions: The registration form page is accessible.
+Test Steps:
+Enter a valid full name.
+Enter an invalid email address (e.g., "invalidemail.com").
+Enter a password of at least 8 characters.
+Confirm the password.
+Select a date of birth.
+Select a gender.
+Choose to subscribe or not to the newsletter.
+Click the Submit button.
+Expected Results: An error message "Please enter a valid email address" is displayed.
+Post-conditions: No user data is stored.
+
+Scenario Identification
+Positive Scenarios
+1. Successful Registration with Valid Data
+Steps: Enter valid details in all fields and submit.
+Expected Outcome: Registration is successful, and a confirmation message is displayed.
+
+ 2. Successful Registration with Newsletter Subscription
+Steps: Enter valid details in all fields, opt-in for the newsletter, and submit.
+Expected Outcome: Registration is successful, and a confirmation message along with newsletter subscription confirmation is displayed.
+
+Negative Scenarios
+1. Registration with Mismatched Passwords
+Steps: Enter valid details but different passwords in the Password and Confirm Password fields, then submit.
+Expected Outcome: An error message indicating passwords do not match is displayed.
+
+2. Registration with Invalid Email Format
+Steps: Enter an invalid email format along with other valid details and submit.
+Expected Outcome: An error message indicating an invalid email format is displayed.
+
+
+Automated Test Scripts
+Positive Scenario: Successful Registration with Valid Data (Using Cypress for JavaScript)
+describe('Registration Form', () => {
+  it('should successfully register with valid data', () => {
+    cy.visit('http://example.com/registration');
+
+    cy.get('input[name="fullname"]').type('John Doe');
+    cy.get('input[name="email"]').type('johndoe@example.com');
+    cy.get('input[name="password"]').type('Password123');
+    cy.get('input[name="confirmPassword"]').type('Password123');
+    cy.get('input[name="dob"]').type('1990-01-01');
+    cy.get('select[name="gender"]').select('Male');
+    cy.get('input[name="newsletter"]').check('Yes');
+    cy.get('button[type="submit"]').click();
+
+    cy.contains('Registration successful').should('be.visible');
+  });
+});
+
+Positive Scenario: Successful Registration with Newsletter Subscription
+describe('Registration Form', () => {
+  it('should successfully register with newsletter subscription', () => {
+    cy.visit('http://example.com/registration');
+
+    cy.get('input[name="fullname"]').type('Jane Doe');
+    cy.get('input[name="email"]').type('janedoe@example.com');
+    cy.get('input[name="password"]').type('Password123');
+    cy.get('input[name="confirmPassword"]').type('Password123');
+    cy.get('input[name="dob"]').type('1990-01-01');
+    cy.get('select[name="gender"]').select('Female');
+    cy.get('input[name="newsletter"]').check('Yes');
+    cy.get('button[type="submit"]').click();
+
+    cy.contains('Registration successful').should('be.visible');
+  });
+});
