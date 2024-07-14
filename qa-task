@@ -109,39 +109,4 @@ Steps: Enter an invalid email format along with other valid details and submit.
 Expected Outcome: An error message indicating an invalid email format is displayed.
 
 
-Automated Test Scripts
-Positive Scenario: Successful Registration with Valid Data (Using Cypress for JavaScript)
-describe('Registration Form', () => {
-  it('should successfully register with valid data', () => {
-    cy.visit('http://example.com/registration');
 
-    cy.get('input[name="fullname"]').type('John Doe');
-    cy.get('input[name="email"]').type('johndoe@example.com');
-    cy.get('input[name="password"]').type('Password123');
-    cy.get('input[name="confirmPassword"]').type('Password123');
-    cy.get('input[name="dob"]').type('1990-01-01');
-    cy.get('select[name="gender"]').select('Male');
-    cy.get('input[name="newsletter"]').check('Yes');
-    cy.get('button[type="submit"]').click();
-
-    cy.contains('Registration successful').should('be.visible');
-  });
-});
-
-Positive Scenario: Successful Registration with Newsletter Subscription
-describe('Registration Form', () => {
-  it('should successfully register with newsletter subscription', () => {
-    cy.visit('http://example.com/registration');
-
-    cy.get('input[name="fullname"]').type('Jane Doe');
-    cy.get('input[name="email"]').type('janedoe@example.com');
-    cy.get('input[name="password"]').type('Password123');
-    cy.get('input[name="confirmPassword"]').type('Password123');
-    cy.get('input[name="dob"]').type('1990-01-01');
-    cy.get('select[name="gender"]').select('Female');
-    cy.get('input[name="newsletter"]').check('Yes');
-    cy.get('button[type="submit"]').click();
-
-    cy.contains('Registration successful').should('be.visible');
-  });
-});
